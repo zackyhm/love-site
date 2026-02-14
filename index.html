@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff4e8b, #ff9ecf);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Containers */
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Page 1 */
+#firstPage button {
+    padding: 15px 35px;
+    font-size: 20px;
+    border-radius: 30px;
+    border: none;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: white;
+    color: #ff4e8b;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: black;
+    color: white;
+    position: absolute;
+}
+
+/* Page 2 */
+#lovePage {
+    display: none;
+    background: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInPage 1s ease-in;
+}
+
+#lovePage h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: fadeInText 2s ease-in;
+}
+
+#lovePage img {
+    width: 90vw;       /* 90% of viewport width */
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 60px pink;
+    object-fit: cover;
+    animation: fadeInImage 2s ease-in;
+}
+
+#lovePage p {
+    font-size: 1.5em;
+    margin-top: 20px;
+    animation: fadeInText 2.5s ease-in;
+}
+
+/* Animations */
+@keyframes fadeInPage {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeInImage {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+}
+@keyframes fadeInText {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: pink;
+    top: 0;
+    left: 50%;
+    opacity: 0.7;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg);}
+    100% { transform: translateY(100vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="firstPage" class="container">
+    <h1 style="font-size:40px;">Wach Katbghini? 😏❤️</h1>
+    <div>
+        <button id="yesBtn" onclick="showLove()">Yes 💖</button>
+        <button id="noBtn" onmouseover="moveButton()">No 😒</button>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="lovePage" class="container">
+    <h1>You & Me Forever ❤️</h1>
+    <img src="photo.jpg" alt="Our Photo">
+    <p>I Love You More Than Anything 💕</p>
+</div>
+
+<script>
+function moveButton() {
+    const button = document.getElementById("noBtn");
+    const container = document.getElementById("firstPage");
+
+    const maxX = container.clientWidth - button.offsetWidth;
+    const maxY = container.clientHeight - button.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+function showLove() {
+    document.getElementById("firstPage").style.display = "none";
+    const lovePage = document.getElementById("lovePage");
+    lovePage.style.display = "flex";
+
+    // Confetti
+    for(let i=0; i<50; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random()*100 + "vw";
+        confetti.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 3000);
+    }
+}
+</script>
+
+</body>
+</html>
