@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love ❤️</title>
-
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    height: 100vh;
+/* Body full screen */
+html, body {
+    width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff4e8b, #ff9ecf);
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(135deg, #ff4e8b, #ff9ecf);
     color: white;
 }
 
@@ -28,13 +27,13 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     text-align: center;
 }
 
-/* Page 1 */
+/* Page 1 buttons */
 #firstPage button {
     padding: 15px 35px;
     font-size: 20px;
@@ -45,22 +44,11 @@ body {
     transition: 0.3s;
 }
 
-#yesBtn {
-    background: white;
-    color: #ff4e8b;
-}
+#yesBtn { background: white; color: #ff4e8b; }
+#yesBtn:hover { transform: scale(1.1); }
+#noBtn { background: black; color: white; position: absolute; }
 
-#yesBtn:hover {
-    transform: scale(1.1);
-}
-
-#noBtn {
-    background: black;
-    color: white;
-    position: absolute;
-}
-
-/* Page 2 */
+/* Page 2 love page */
 #lovePage {
     display: none;
     background: black;
@@ -76,16 +64,15 @@ body {
     animation: fadeInText 2s ease-in;
 }
 
+/* FULL SCREEN IMAGE */
 #lovePage img {
-    width: 90vw;       /* 90% of viewport width */
-    max-width: 600px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 0 60px pink;
-    object-fit: cover;
+    width: 100vw;       /* full width */
+    height: 100vh;      /* full height */
+    object-fit: cover;  /* cover screen, keep ratio */
     animation: fadeInImage 2s ease-in;
 }
 
+/* Text under image */
 #lovePage p {
     font-size: 1.5em;
     margin-top: 20px;
@@ -93,38 +80,26 @@ body {
 }
 
 /* Animations */
-@keyframes fadeInPage {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-@keyframes fadeInImage {
-    from {opacity: 0; transform: scale(0.8);}
-    to {opacity: 1; transform: scale(1);}
-}
-@keyframes fadeInText {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+@keyframes fadeInPage { from {opacity: 0;} to {opacity: 1;} }
+@keyframes fadeInImage { from {opacity: 0; transform: scale(0.8);} to {opacity: 1; transform: scale(1);} }
+@keyframes fadeInText { from {opacity: 0; transform: translateY(-20px);} to {opacity: 1; transform: translateY(0);} }
 
 /* Confetti */
 .confetti {
     position: fixed;
     width: 10px;
     height: 10px;
-    background: pink;
     top: 0;
     left: 50%;
     opacity: 0.7;
     animation: fall 3s linear forwards;
 }
-
 @keyframes fall {
     0% { transform: translateY(0) rotate(0deg);}
     100% { transform: translateY(100vh) rotate(360deg);}
 }
 </style>
 </head>
-
 <body>
 
 <!-- PAGE 1 -->
@@ -144,20 +119,19 @@ body {
 </div>
 
 <script>
+// No button fun
 function moveButton() {
     const button = document.getElementById("noBtn");
     const container = document.getElementById("firstPage");
-
     const maxX = container.clientWidth - button.offsetWidth;
     const maxY = container.clientHeight - button.offsetHeight;
-
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
-
     button.style.left = x + "px";
     button.style.top = y + "px";
 }
 
+// Show love page + confetti
 function showLove() {
     document.getElementById("firstPage").style.display = "none";
     const lovePage = document.getElementById("lovePage");
@@ -170,13 +144,11 @@ function showLove() {
         confetti.style.left = Math.random()*100 + "vw";
         confetti.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
         document.body.appendChild(confetti);
-
-        setTimeout(() => {
-            confetti.remove();
-        }, 3000);
+        setTimeout(() => { confetti.remove(); }, 3000);
     }
 }
 </script>
 
 </body>
 </html>
+
